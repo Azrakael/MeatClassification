@@ -1,0 +1,16 @@
+_VGG16/dataset
+
+train folder: 494
+    beef : 182
+    lamb : 136
+    pork : 176
+
+valid folder: 165
+    beef : 67
+    lamb : 46
+    pork : 52
+
+test folder:  165
+    beef : 55
+    lamb : 48
+    pork : 62
