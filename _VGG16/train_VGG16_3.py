@@ -45,15 +45,17 @@ val_datagen = ImageDataGenerator(rescale=1./255)
 test_datagen = ImageDataGenerator(rescale=1./255)
 
 # 데이터셋 생성기 생성
-train_generator, val_generator, test_generator = [datagen.flow_from_dataframe(
-    dataframe=labels_df,
-    directory=dir,
-    x_col='Image Name',
-    y_col='Label',
-    target_size=(224, 224),
-    batch_size=8,  
-    class_mode='categorical')
-    for datagen, dir in zip([train_datagen, val_datagen, test_datagen], [train_dir, val_dir, test_dir])]
+train_generator, val_generator, test_generator = [
+    datagen.flow_from_dataframe(
+        dataframe=labels_df,
+        directory=dir_,
+        x_col='Image Name',
+        y_col='Label',
+        target_size=(224, 224),
+        batch_size=8,
+        class_mode='categorical',
+        seed=42
+    ) for datagen, dir_ in zip([train_datagen, val_datagen, test_datagen], [train_dir, val_dir, test_dir])]
 
 # 모델 생성
 base_model = VGG16(weights='imagenet', include_top=False, input_shape=(224, 224, 3))

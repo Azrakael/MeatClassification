@@ -1,7 +1,7 @@
 #%%
 import pandas as pd
 import tensorflow as tf
-from tensorflow.keras.applications import VGG16
+from tensorflow.keras.applications import InceptionV3
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Dense, Flatten, BatchNormalization, Dropout
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
@@ -14,11 +14,10 @@ import logging
 logging.getLogger('tensorflow').setLevel(logging.ERROR)
 
 # 라벨 파일 로드
-labels_df = pd.read_csv('../processed_224/labels.csv')
+labels_df = pd.read_csv('../processed_299/labels.csv')
 
 # 데이터셋 경로 설정
 base_dir = './dataset'
-
 models_dir = '../models'
 if not os.path.exists(models_dir):
     os.makedirs(models_dir)
@@ -29,19 +28,18 @@ test_dir = os.path.join(base_dir, 'test')
 
 # 이미지 데이터 생성기 생성
 train_datagen = ImageDataGenerator(
-    rescale=1./255,  # 의미: 이미지를 1/255로 스케일링
-    shear_range=0.2,  # 의미: 이미지를 0.2만큼
-    zoom_range=[0.8, 1.2],  # 의미: 이미지를 0.8배에서 1.2배 크기로 확대
-    horizontal_flip=True,  # 의미: 이미지를 수평으로 뒤집기
-    rotation_range=30,  # 의미: 이미지를 30도 회전
-    width_shift_range=0.1,  # 의미: 이미지를 0.1만큼 수평으로 이동
-    height_shift_range=0.1, # 의미: 이미지를 0.1만큼 수직으로 이동
-    brightness_range=[0.8, 1.2], # 의미: 이미지를 0.8배에서 1.2배 크기로 밝기 조절
-    fill_mode='nearest' # 의미: 이미지를 회전하거나 이동할 때 생기는 공간을 가장 가까운 값으로 채우기
+    rescale=1./255,
+    shear_range=0.2,
+    zoom_range=[0.8, 1.2],
+    horizontal_flip=True,
+    rotation_range=30,
+    width_shift_range=0.1,
+    height_shift_range=0.1,
+    brightness_range=[0.8, 1.2],
+    fill_mode='nearest'
 )
 
 val_datagen = ImageDataGenerator(rescale=1./255)
-
 test_datagen = ImageDataGenerator(rescale=1./255)
 
 # 데이터셋 생성기 생성
@@ -51,30 +49,32 @@ train_generator, val_generator, test_generator = [
         directory=dir_,
         x_col='Image Name',
         y_col='Label',
-        target_size=(224, 224),
-        batch_size=32,
+        target_size=(299, 299),
+        batch_size=8,
         class_mode='categorical',
         seed=42
     ) for datagen, dir_ in zip([train_datagen, val_datagen, test_datagen], [train_dir, val_dir, test_dir])]
 
 # 모델 생성
-base_model = VGG16(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
-for layer in base_model.layers[:-6]: # 4 >> 6 마지막 6개의 레이어만 학습
+base_model = InceptionV3(weights='imagenet', include_top=False, input_shape=(299, 299, 3))
+for layer in base_model.layers[:-8]:  # -6 >> -8
     layer.trainable = False
 
 x = Flatten()(base_model.output)
-x = Dense(4096, activation='relu', kernel_regularizer=l2(0.001))(x)
+x = Dense(2048, activation='relu', kernel_regularizer=l2(0.001))(x)
 x = BatchNormalization()(x)
-x = Dropout(0.7)(x) # 0.5 >> 0.7
+x = Dropout(0.8)(x)
 predictions = Dense(3, activation='softmax')(x)
 model = Model(inputs=base_model.input, outputs=predictions)
 
-model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001), 
+                loss='categorical_crossentropy', 
+                metrics=['accuracy'])
 
 # 콜백 설정
 early_stopping = EarlyStopping(monitor='val_loss', patience=10, verbose=1, mode='min')
 model_checkpoint = ModelCheckpoint(
-    filepath=os.path.join(models_dir, 'classification_VGG16_BM_2.keras'),
+    filepath=os.path.join(models_dir, 'classification_InceptionV3_6_BM.keras'),
     save_best_only=True,
     monitor='val_loss',
     mode='min'
@@ -85,15 +85,16 @@ reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=5, min_lr
 history = model.fit(
     train_generator,
     steps_per_epoch=len(train_generator),
-    epochs=100,     # 50 >> 100
+    epochs=50,  # 100 >> 50
     validation_data=val_generator,
     validation_steps=len(val_generator),
-    callbacks=[early_stopping, model_checkpoint, reduce_lr]
-)
+    callbacks=[early_stopping, model_checkpoint, reduce_lr])
 
-model.save(os.path.join(models_dir, 'classification_VGG16_2.keras'))
+# 모델 저장
+model.save(os.path.join(models_dir, 'classification_InceptionV3_6.keras'))
 
-with open(os.path.join(models_dir, 'classification_VGG16_2_history.pkl'), 'wb') as file:
+# 훈련 이력 저장
+with open(os.path.join(models_dir, 'classification_InceptionV3_6_history.pkl'), 'wb') as file:
     pickle.dump(history.history, file)
 
 # 모델 평가

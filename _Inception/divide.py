@@ -5,7 +5,7 @@ import os
 import shutil
 
 # CSV 파일 로드
-labels_df = pd.read_csv('../processed_224/labels.csv')
+labels_df = pd.read_csv('../processed_299/labels.csv')
 
 # 새로운 폴더 경로 설정
 dataset_dir = './dataset'
@@ -52,7 +52,7 @@ def split_data(df, source_dir, destination_dir, train_ratio=0.6, val_ratio=0.2, 
             print(f"  {label}: {count} images")
 
 # 원본 이미지 파일이 있는 폴더 경로 설정
-source_dir = '../processed_224'
+source_dir = '../processed_299'
 
 # 각 클래스명에 대해 split_data 함수 호출
 split_data(labels_df, source_dir, dataset_dir)

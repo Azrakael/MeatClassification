@@ -1,0 +1,12 @@
+train folder:
+  beef: 182 images
+  lamb: 136 images
+  pork: 176 images
+valid folder:
+  beef: 67 images
+  lamb: 46 images
+  pork: 52 images
+test folder:
+  beef: 55 images
+  lamb: 48 images
+  pork: 62 images

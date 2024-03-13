@@ -1,125 +1,141 @@
 classification_VGG16_2
-              precision    recall  f1-score   support
+                precision    recall  f1-score   support
 
-        beef       0.87      0.84      0.85        56
-        lamb       0.84      0.75      0.79        48
-        pork       0.81      0.90      0.86        63
+            beef       0.00      0.00      0.00        56
+            lamb       0.54      0.94      0.68        48
+            pork       0.63      0.83      0.71        63
 
-    accuracy                           0.84       167
-   macro avg       0.84      0.83      0.83       167
-weighted avg       0.84      0.84      0.84       167
+        accuracy                           0.58       167
+    macro avg       0.39      0.59      0.46       167
+    weighted avg       0.39      0.58      0.46       167
 
-Validation loss: 1.405539631843567, Validation accuracy: 0.8848484754562378
-Test loss: 1.726357102394104, Test accuracy: 0.8383233547210693
+    Validation loss: 5.680087566375732, Validation accuracy: 0.539393961429596
+    Test loss: 4.862892150878906, Test accuracy: 0.5808383226394653
+
+------------------------------------------------------------------------------------------------------------------
 
 classification_VGG16_3
-              precision    recall  f1-score   support
+                precision    recall  f1-score   support
 
-        beef       0.83      0.93      0.87        56
-        lamb       0.97      0.75      0.85        48
-        pork       0.88      0.94      0.91        63
+            beef       0.84      0.88      0.86        56
+            lamb       0.91      0.65      0.76        48
+            pork       0.77      0.92      0.84        63
 
-    accuracy                           0.88       167
-   macro avg       0.89      0.87      0.88       167
-weighted avg       0.89      0.88      0.88       167
+        accuracy                           0.83       167
+    macro avg       0.84      0.81      0.82       167
+    weighted avg       0.84      0.83      0.82       167
 
-Validation loss: 1.1943100690841675, Validation accuracy: 0.8969696760177612
-Test loss: 1.4259896278381348, Test accuracy: 0.8802395462989807
+    Validation loss: 1.611248254776001, Validation accuracy: 0.8787878751754761
+    Test loss: 1.9024826288223267, Test accuracy: 0.832335352897644
+
+------------------------------------------------------------------------------------------------------------------
 
 classification_VGG16_3_1
-              precision    recall  f1-score   support
+                precision    recall  f1-score   support
 
-        beef       0.68      0.80      0.74        56
-        lamb       1.00      0.19      0.32        48
-        pork       0.65      0.95      0.77        63
+            beef       0.87      0.86      0.86        56
+            lamb       0.92      0.75      0.83        48
+            pork       0.81      0.94      0.87        63
 
-    accuracy                           0.68       167
-   macro avg       0.78      0.65      0.61       167
-weighted avg       0.76      0.68      0.63       167
+        accuracy                           0.86       167
+    macro avg       0.87      0.85      0.85       167
+    weighted avg       0.86      0.86      0.86       167
 
-Validation loss: 3.168966054916382, Validation accuracy: 0.7515151500701904
-Test loss: 3.523286819458008, Test accuracy: 0.682634711265564
+    Validation loss: 2.0564281940460205, Validation accuracy: 0.8909090757369995
+    Test loss: 2.4560863971710205, Test accuracy: 0.85628741979599
+
+------------------------------------------------------------------------------------------------------------------
 
 classification_VGG16_3_2
-              precision    recall  f1-score   support
+                precision    recall  f1-score   support
 
-        beef       0.92      0.79      0.85        56
-        lamb       0.90      0.79      0.84        48
-        pork       0.79      0.97      0.87        63
+            beef       0.83      0.80      0.82        56
+            lamb       0.89      0.67      0.76        48
+            pork       0.77      0.94      0.84        63
 
-    accuracy                           0.86       167
-   macro avg       0.87      0.85      0.85       167
-weighted avg       0.87      0.86      0.86       167
+        accuracy                           0.81       167
+    macro avg       0.83      0.80      0.81       167
+    weighted avg       0.82      0.81      0.81       167
 
-Validation loss: 1.5112056732177734, Validation accuracy: 0.8848484754562378
-Test loss: 1.7374699115753174, Test accuracy: 0.85628741979599
+    Validation loss: 1.5261677503585815, Validation accuracy: 0.8727272748947144
+    Test loss: 1.835378885269165, Test accuracy: 0.8143712282180786
+
+------------------------------------------------------------------------------------------------------------------
 
 classification_VGG16_3_3
-              precision    recall  f1-score   support
+                precision    recall  f1-score   support
 
-        beef       0.95      0.71      0.82        56
-        lamb       0.88      0.73      0.80        48
-        pork       0.72      0.97      0.82        63
+            beef       0.87      0.84      0.85        56
+            lamb       0.97      0.67      0.79        48
+            pork       0.76      0.97      0.85        63
 
-    accuracy                           0.81       167
-   macro avg       0.85      0.80      0.81       167
-weighted avg       0.84      0.81      0.81       167
+        accuracy                           0.84       167
+    macro avg       0.87      0.82      0.83       167
+    weighted avg       0.86      0.84      0.84       167
 
-Validation loss: 1.676443338394165, Validation accuracy: 0.7878788113594055
-Test loss: 1.76845121383667, Test accuracy: 0.8143712282180786
+    Validation loss: 1.3887763023376465, Validation accuracy: 0.8363636136054993
+    Test loss: 1.7280200719833374, Test accuracy: 0.8383233547210693
+
+------------------------------------------------------------------------------------------------------------------
 
 classification_VGG16_3_4
-              precision    recall  f1-score   support
+                precision    recall  f1-score   support
 
-        beef       0.89      0.73      0.80        56
-        lamb       0.80      0.77      0.79        48
-        pork       0.77      0.92      0.84        63
+            beef       0.86      0.77      0.81        56
+            lamb       0.83      0.81      0.82        48
+            pork       0.84      0.94      0.89        63
 
-    accuracy                           0.81       167
-   macro avg       0.82      0.81      0.81       167
-weighted avg       0.82      0.81      0.81       167
+        accuracy                           0.84       167
+    macro avg       0.84      0.84      0.84       167
+    weighted avg       0.84      0.84      0.84       167
 
-Validation loss: 2.195467233657837, Validation accuracy: 0.8606060743331909
-Test loss: 2.46376371383667, Test accuracy: 0.8143712282180786
+    Validation loss: 2.217621326446533, Validation accuracy: 0.8969696760177612
+    Test loss: 2.525263547897339, Test accuracy: 0.8443113565444946
+
+------------------------------------------------------------------------------------------------------------------
 
 classification_VGG16_4
-              precision    recall  f1-score   support
+                precision    recall  f1-score   support
 
-        beef       0.81      0.82      0.81        56
-        lamb       0.87      0.71      0.78        48
-        pork       0.80      0.90      0.85        63
+            beef       0.81      0.91      0.86        56
+            lamb       0.89      0.71      0.79        48
+            pork       0.86      0.90      0.88        63
 
-    accuracy                           0.82       167
-   macro avg       0.83      0.81      0.82       167
-weighted avg       0.82      0.82      0.82       167
+        accuracy                           0.85       167
+    macro avg       0.86      0.84      0.84       167
+    weighted avg       0.85      0.85      0.85       167
 
-Validation loss: 2.6639490127563477, Validation accuracy: 0.8727272748947144
-Test loss: 3.0222320556640625, Test accuracy: 0.8203592896461487
+    Validation loss: 1.6943070888519287, Validation accuracy: 0.8787878751754761
+    Test loss: 2.035759925842285, Test accuracy: 0.8502994179725647
+
+------------------------------------------------------------------------------------------------------------------
 
 classification_VGG16_5
-              precision    recall  f1-score   support
+                precision    recall  f1-score   support
 
-        beef       0.85      0.84      0.85        56
-        lamb       0.78      0.88      0.82        48
-        pork       0.91      0.84      0.88        63
+            beef       0.87      0.82      0.84        56
+            lamb       0.84      0.75      0.79        48
+            pork       0.83      0.94      0.88        63
 
-    accuracy                           0.85       167
-   macro avg       0.85      0.85      0.85       167
-weighted avg       0.85      0.85      0.85       167
+        accuracy                           0.84       167
+    macro avg       0.85      0.84      0.84       167
+    weighted avg       0.85      0.84      0.84       167
 
-Validation loss: 2.2819173336029053, Validation accuracy: 0.939393937587738
-Test loss: 2.823122024536133, Test accuracy: 0.8502994179725647
+    Validation loss: 2.226173162460327, Validation accuracy: 0.8848484754562378
+    Test loss: 2.487760543823242, Test accuracy: 0.8443113565444946
+
+------------------------------------------------------------------------------------------------------------------
 
 classification_VGG16_6
-              precision    recall  f1-score   support
+                precision    recall  f1-score   support
 
-        beef       0.80      0.88      0.84        56
-        lamb       0.86      0.77      0.81        48
-        pork       0.86      0.86      0.86        63
+            beef       0.86      0.75      0.80        56
+            lamb       0.78      0.81      0.80        48
+            pork       0.81      0.87      0.84        63
 
-    accuracy                           0.84       167
-   macro avg       0.84      0.83      0.84       167
-weighted avg       0.84      0.84      0.84       167
-
-Validation loss: 1.07683527469635, Validation accuracy: 0.8606060743331909
-Test loss: 1.3888648748397827, Test accuracy: 0.8383233547210693
+        accuracy                           0.81       167
+    macro avg       0.82      0.81      0.81       167
+    weighted avg       0.82      0.81      0.81       167
+    
+    Validation loss: 2.973538637161255, Validation accuracy: 0.8242424130439758
+    Test loss: 3.188394069671631, Test accuracy: 0.8143712282180786

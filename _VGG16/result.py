@@ -16,10 +16,10 @@ font = fm.FontProperties(fname=fontpath).get_name()
 plt.rcParams['font.family'] = font
 
 # 저장된 모델 불러오기
-model = tf.keras.models.load_model('../models/classification_VGG16_3_4.keras')
+model = tf.keras.models.load_model('../models/classification_VGG16_6.keras')
 
 # history 데이터 로드
-history = pd.read_pickle('../models/classification_VGG16_3_4_history.pkl')
+history = pd.read_pickle('../models/classification_VGG16_6_history.pkl')
 
 # 학습 및 검증 손실 그래프
 plt.figure(figsize=(12, 4))

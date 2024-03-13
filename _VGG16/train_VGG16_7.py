@@ -52,29 +52,31 @@ train_generator, val_generator, test_generator = [
         x_col='Image Name',
         y_col='Label',
         target_size=(224, 224),
-        batch_size=32,
+        batch_size=16,
         class_mode='categorical',
         seed=42
     ) for datagen, dir_ in zip([train_datagen, val_datagen, test_datagen], [train_dir, val_dir, test_dir])]
 
 # 모델 생성
 base_model = VGG16(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
-for layer in base_model.layers[:-6]: # 4 >> 6 마지막 6개의 레이어만 학습
+for layer in base_model.layers[:-8]: # 4 >> 6 마지막 6개의 레이어만 학습
     layer.trainable = False
 
 x = Flatten()(base_model.output)
-x = Dense(4096, activation='relu', kernel_regularizer=l2(0.001))(x)
+x = Dense(2048, activation='relu', kernel_regularizer=l2(0.001))(x)  
 x = BatchNormalization()(x)
 x = Dropout(0.7)(x) # 0.5 >> 0.7
 predictions = Dense(3, activation='softmax')(x)
 model = Model(inputs=base_model.input, outputs=predictions)
 
-model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001), 
+                loss='categorical_crossentropy', 
+                metrics=['accuracy'])
 
 # 콜백 설정
 early_stopping = EarlyStopping(monitor='val_loss', patience=10, verbose=1, mode='min')
 model_checkpoint = ModelCheckpoint(
-    filepath=os.path.join(models_dir, 'classification_VGG16_BM_2.keras'),
+    filepath=os.path.join(models_dir, 'classification_VGG16_BM_7.keras'),
     save_best_only=True,
     monitor='val_loss',
     mode='min'
@@ -85,15 +87,15 @@ reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=5, min_lr
 history = model.fit(
     train_generator,
     steps_per_epoch=len(train_generator),
-    epochs=100,     # 50 >> 100
+    epochs=50,     
     validation_data=val_generator,
     validation_steps=len(val_generator),
     callbacks=[early_stopping, model_checkpoint, reduce_lr]
 )
 
-model.save(os.path.join(models_dir, 'classification_VGG16_2.keras'))
+model.save(os.path.join(models_dir, 'classification_VGG16_7.keras'))
 
-with open(os.path.join(models_dir, 'classification_VGG16_2_history.pkl'), 'wb') as file:
+with open(os.path.join(models_dir, 'classification_VGG16_7_history.pkl'), 'wb') as file:
     pickle.dump(history.history, file)
 
 # 모델 평가
@@ -101,5 +103,6 @@ val_loss, val_accuracy = model.evaluate(val_generator)
 test_loss, test_accuracy = model.evaluate(test_generator)
 print(f'Validation loss: {val_loss}, Validation accuracy: {val_accuracy}')
 print(f'Test loss: {test_loss}, Test accuracy: {test_accuracy}')
+# %%
 # %%
 # 
